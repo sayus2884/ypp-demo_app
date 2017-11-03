@@ -1,0 +1,2 @@
+- use redux to create a global variable to store shoppe data.
+- make a wrapper that can contain shoppe data upon login so that you don't have to load them every single time.

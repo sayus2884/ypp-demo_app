@@ -1,0 +1,28 @@
+/* CSS declarations go here */
+
+body > div,
+body > div > div{
+   height: 100%
+}
+
+.contentWrapper {
+   padding-bottom: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+.background{
+   background: url(/img/background.png);
+   position: fixed;
+   height: 500px;
+   width: 100%;
+   left: 0;
+   z-index: -1;
+   bottom: 0;
+   top: 340px;
+   background-repeat: repeat;
+}
