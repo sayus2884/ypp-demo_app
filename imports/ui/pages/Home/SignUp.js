@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Container, Grid, Header, Segment, Form, Button, Divider } from 'semantic-ui-react'
-import { SEO } from '/imports/api/seo';
 
 const _ = lodash
 

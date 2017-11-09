@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Container, Grid, Header, Segment, Form, Button, Divider, Checkbox, Input } from 'semantic-ui-react'
 import { SHOPPE_COMMODITIES, LABOR, SHOPPES, OCEANS } from '/imports/helpers';
@@ -36,8 +37,7 @@ class ShoppeCreationForm extends Component {
       });
 
       Meteor.call('shoppes.createShoppe', data, () => {
-         let path = FlowRouter.path('DockSales');
-         FlowRouter.go(path);
+         this.props.history.push('/dock');
       });
    }
 
@@ -51,13 +51,13 @@ class ShoppeCreationForm extends Component {
 
    render(){
       const { ocean, island, type, name, willUseShoppeType } = this.state;
-      const oceanOptions = createDrowdownOptions(OCEANS, { key: 'name'}, {
+      const oceanOptions = createDrowdownOptions(OCEANS, { key: 'name', value: 'name'}, {
          textOption: (text) => _.startCase(text)
       });
-      const islandOptions = createDrowdownOptions(_.find(OCEANS, { name: ocean}).islands, { key: 'name' }, {
+      const islandOptions = createDrowdownOptions(_.find(OCEANS, { name: ocean}).islands, { key: 'name', value: 'name' }, {
          textOption: (text) => _.startCase(text)
       });
-      const shoppeOptions = createDrowdownOptions(SHOPPES, { key: 'name' }, {
+      const shoppeOptions = createDrowdownOptions(SHOPPES, { key: 'name', value: 'name' }, {
          textOption: (text) => _.startCase(text)
       });
 
@@ -119,4 +119,4 @@ class ShoppeCreationForm extends Component {
    }
 }
 
-export default ShoppeCreationForm;
+export default withRouter(ShoppeCreationForm);

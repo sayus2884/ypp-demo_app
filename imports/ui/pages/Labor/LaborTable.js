@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Table, Header } from 'semantic-ui-react'
 import LaborItem from './LaborItem';
@@ -34,4 +35,13 @@ class LaborTable extends Component {
    }
 }
 
-export default LaborTable;
+export default connect((state) => {
+   const { allShoppes, currentShoppe } = state;
+   const { commodities, labor, _id } = allShoppes[currentShoppe];
+
+   return {
+      labor,
+      shoppeId: _id
+   };
+
+})(LaborTable);

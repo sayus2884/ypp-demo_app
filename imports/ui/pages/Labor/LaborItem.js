@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Table, Header, Input } from 'semantic-ui-react'
 import { calculateRevenue, calculateProfit } from '/imports/helpers/calculations';
@@ -12,17 +13,17 @@ class LaborItem extends Component {
       super(props);
 
       this.state = props.labor;
-      this.handleInputChange = this.handleInputChange.bind(this);
+      this._handleInputChange = props._handleInputChange.bind(this);
 
    }
 
-   handleInputChange(event, { name, value }){
-      const data = { [name]: Number(value) };
+   _handleInputChange(event, { name, value }){
+      const data = { [name]: Number(value) || 0 };
       this.setState(data, () => Meteor.call('shoppes.updateLabor', this.props.shoppeId, this.state));
    }
 
    render(){
-      const { name, wage, cost } = this.state;
+      const { name, wage, cost } = this.props.labor;
 
       return(
          <Table.Row>
@@ -34,11 +35,22 @@ class LaborItem extends Component {
                </Header>
             </Table.Cell>
 
-            <Table.Cell><Input type="number" fluid value={wage} onChange={this.handleInputChange} name="wage"/></Table.Cell>
-            <Table.Cell><Input type="number" fluid value={cost} onChange={this.handleInputChange} name="cost"/></Table.Cell>
+            <Table.Cell><Input type="text" pattern="[0-9]*" fluid value={wage} onChange={this._handleInputChange} name="wage"/></Table.Cell>
+            <Table.Cell><Input type="text" pattern="[0-9]*" fluid value={cost} onChange={this._handleInputChange} name="cost"/></Table.Cell>
          </Table.Row>
       )
    }
 }
 
-export default LaborItem;
+const mapDispatchToProp = dispatch => {
+   return {
+      _handleInputChange(event, { name, value }) {
+         const data = { [name]: Number(value) || 0 };
+
+         this.setState(data, () => Meteor.call('shoppes.updateLabor', this.props.shoppeId, this.state));
+
+      },
+   }
+}
+
+export default connect( state => ({}), mapDispatchToProp )(LaborItem);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Shoppes } from '/imports/api/shoppes';
 import Loading from '/imports/ui/common/Loading';
@@ -20,28 +21,22 @@ class Labor extends Component {
          return <Loading />;
       }
 
-      const { _id, labor } = this.props.shoppe;
-
       return (
          <div className="contentWrapper">
             <Header as="h1">
                Labor Management
             </Header>
 
-            <LaborTable labor={labor} shoppeId={_id}/>
+            <LaborTable/>
          </div>
       );
    }
 }
 
-export default createContainer(() => {
+export default connect( state => {
+   const { loading } = state;
 
-   const taxSubscription = Meteor.subscribe('taxes', 'obsidian');
-   const shoppeSubscription = Meteor.subscribe('shoppes', { owner: Meteor.userId() });
-   const loading = !shoppeSubscription.ready() || !taxSubscription.ready();
-   const shoppe = Shoppes.findOne();
-   const taxChart = Shoppes.findOne();
-
-   return { shoppe, loading }
-
-}, Labor);
+   return {
+      loading
+   };
+})(Labor);

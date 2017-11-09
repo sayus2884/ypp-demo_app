@@ -9,12 +9,6 @@ body > div > div{
    padding-bottom: 20px;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
-}
-
 .background{
    background: url(/img/background.png);
    position: fixed;

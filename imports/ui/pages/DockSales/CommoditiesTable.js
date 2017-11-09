@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Table, Header } from 'semantic-ui-react'
 import Commodity from './Commodity';
@@ -31,10 +32,19 @@ class CommoditiesTable extends Component {
    }
 
    renderCommodities(){
-      const { shoppeId, commodities, labor } = this.props;
+      const { commodities } = this.props;
 
-      return this.props.commodities.map((commodity) => <Commodity key={commodity.name} commodity={commodity} commodities={commodities} labor={labor} shoppeId={shoppeId}/>);
+      return commodities.map((commodity, index) => <Commodity key={commodity.name} commodity={commodity} index={index}/>);
    }
 }
 
-export default CommoditiesTable;
+export default connect((state) => {
+   const { allShoppes, currentShoppe } = state;
+   const { commodities } = allShoppes[currentShoppe];
+
+
+   return {
+      commodities
+   };
+
+})(CommoditiesTable);

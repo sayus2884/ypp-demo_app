@@ -32,6 +32,9 @@ class ShoppeCreation extends Component {
                   <ShoppeCreationForm />
                </Segment>
             </Grid>
+
+            <div className="background"></div>
+            
          </Container>
       );
    }

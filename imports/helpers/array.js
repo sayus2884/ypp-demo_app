@@ -10,7 +10,7 @@ export const createDrowdownOptions = (array, {key, value, text, icon},
 
    const { keyOption, valueOption, textOption } = options
 
-   return _.map(array, (obj) => {
+   return _.map(array, (obj, index) => {
       if (typeof obj !== 'object' ) {
          return {
             key: keyOption ? keyOption(obj) : obj,
@@ -24,7 +24,7 @@ export const createDrowdownOptions = (array, {key, value, text, icon},
       return {
          key: keyOption ? keyOption(obj[key]) : obj[key],
          //Pass key by default if arguments do not exist
-         value: valueOption ? valueOption(obj[ value ? value : key ]) : value ? obj[value] : obj[key],
+         value: valueOption ? valueOption(obj[ value ? value : key ]) : value ? obj[value] : parseInt(index),
          text: textOption ? textOption(obj[text ? text : key ]) : text ? obj[text] : obj[key],
          icon
       }

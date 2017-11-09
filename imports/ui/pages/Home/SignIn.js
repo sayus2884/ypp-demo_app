@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { createContainer } from 'meteor/react-meteor-data';
-import { Container, Grid, Header, Segment, Form, Button, Divider } from 'semantic-ui-react'
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { Container, Grid, Header, Segment, Form, Button, Divider } from 'semantic-ui-react';
 import SignUp from './SignUp';
-import { SEO } from '/imports/api/seo';
+
+import { setUser } from '/imports/actions';
+
 
 const _ = lodash
 
@@ -17,36 +20,9 @@ class SignIn extends Component {
          password: ''
       };
 
-      this._handleSignIn = this._handleSignIn.bind(this);
-      this._handleSignUp = this._handleSignUp.bind(this);
+      this._handleSignIn = props._handleSignIn.bind(this);
+      this._handleSignUp = props._handleSignUp.bind(this);
       this._handleInputChange = this._handleInputChange.bind(this);
-   }
-
-   _handleSignIn(event){
-      event.preventDefault();
-
-      const { email, password } = this.state;
-
-      Meteor.loginWithPassword(email, password, (err, res) => {
-         if (!err){
-            const path = FlowRouter.path('DockSales')
-            FlowRouter.go(path)
-         }
-      });
-   }
-
-   _handleSignUp(event){
-      event.preventDefault();
-
-      const { email, password } = this.state;
-      const credentials = { email, password }
-
-      Accounts.createUser(credentials, function(err){
-         let path = FlowRouter.path('ShoppeCreation');
-         FlowRouter.go(path);
-      });
-
-      return false;
    }
 
    _handleInputChange(event, { name, value }){
@@ -98,7 +74,40 @@ class SignIn extends Component {
          </div>
       );
    }
-
 }
 
-export default SignIn;
+const mapStateToProp = state => {
+   return {};
+}
+
+const mapDispatchToProp = dispatch => {
+   return {
+      _handleSignIn(event) {
+         event.preventDefault();
+
+         const { email, password } = this.state;
+
+         Meteor.loginWithPassword(email, password, (err, res) => {
+            if (!err){
+               dispatch(setUser(Meteor.user()));
+               this.props.history.push('/dock');
+            }
+         });
+      },
+
+      _handleSignUp(event){
+         event.preventDefault();
+
+         const { email, password } = this.state;
+         const credentials = { email, password }
+
+         Accounts.createUser(credentials, (err) => {
+            this.props.history.push('/createShoppe');
+         });
+
+         return false;
+      }
+   }
+}
+
+export default withRouter(connect( state => {return {}}, mapDispatchToProp)(SignIn));

@@ -4,6 +4,10 @@ import { Shoppes } from './collection';
 if (Meteor.isServer) {
    Meteor.publish('shoppes', function({ _id, owner, ocean, island, createdAt, asc = false }) {
 
+      if (!Meteor.userId()) {
+         throw new Meteor.Error('not-authorized');
+      }
+
       let selector = {};
 
       if (_id) {

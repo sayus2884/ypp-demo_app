@@ -27,8 +27,6 @@ Meteor.methods({
 
    'shoppes.updateLabor' (_id, labor){
 
-      console.log(_id);
-
       if (!Meteor.userId()) {
          throw new Meteor.Error('not-authorized');
       }

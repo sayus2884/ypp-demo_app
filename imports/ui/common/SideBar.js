@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-import { Menu, Icon, Sidebar } from 'semantic-ui-react'
+import { withRouter } from "react-router-dom";
+import { Menu, Icon, Sidebar } from 'semantic-ui-react';
 
 const _ = lodash;
 
@@ -8,32 +9,17 @@ class SideNavBar extends Component {
    constructor(props){
       super(props);
 
-      this.state = {
-         isLoggedIn: Meteor.userId(),
-      };
-
-      this._handleSignOut = this._handleSignOut.bind(this);
       this._handleItemClick = this._handleItemClick.bind(this);
 
    }
 
-   _handleSignOut(event){
-      event.preventDefault();
-      Meteor.logout(() => {
-         let path = FlowRouter.path('/');
-         FlowRouter.go(path);
-      });
-   }
-
    _handleItemClick(e, { name }){
-      this.setState({ activeItem: name });
-
-      let path = FlowRouter.path(name);
-      FlowRouter.go(path);
+      
+      this.props.history.push(name);
    }
 
    render(){
-      const { activeItem } = this.state;
+      const { activeItem } = this.props;
 
       return (
          <div>
@@ -47,22 +33,22 @@ class SideNavBar extends Component {
                vertical>
 
                <Menu.Item
-                  name='DockSales'
-                  active={activeItem === 'commodities'}
+                  name='dock'
+                  active={activeItem === 'dock'}
                   onClick={this._handleItemClick}>
                   <Icon name='anchor' />
                   Dock Sales
                </Menu.Item>
 
                <Menu.Item
-                  name='ShoppeSales'
-                  active={activeItem === 'shoppeSales'} onClick={this._handleItemClick}>
+                  name='shoppe'
+                  active={activeItem === 'shoppe'} onClick={this._handleItemClick}>
                   <Icon name='home' />
                   Shoppe Sales <br/>(Coming Soon)
                </Menu.Item>
 
                <Menu.Item
-                  name='Labor'
+                  name='labor'
                   active={activeItem === 'labor'} onClick={this._handleItemClick}>
                   <Icon name='address card outline' />
                   Labor
@@ -73,4 +59,4 @@ class SideNavBar extends Component {
    }
 }
 
-export default SideNavBar;
+export default withRouter(SideNavBar);
