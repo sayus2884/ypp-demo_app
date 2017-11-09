@@ -19,7 +19,7 @@ class Details extends Component {
             <Header as="h1">
                YPP Shoppe Analytics (Alpha)
                <Header.Subheader>
-                  A YPP Shoppe Analytics tool that helps you understand how much you gain or lose and empowers you to make the right decisions to handle yer stall.
+                  A YPP Shoppe Analytics tool that helps you understand how much you are gaining or losing and empowers you to make the right decisions to handle your stall.
                </Header.Subheader>
             </Header>
 
