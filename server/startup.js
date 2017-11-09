@@ -36,7 +36,7 @@ const createUser = (userDetails) => {
       const user = Meteor.users.findOne({'emails.address': userDetails.email});
 
       if (user) {
-         createShoppe(user._id, 'IRON_MONGER')
+         createShoppe(user._id, `Caine's Iron Monger Stall` )
          console.log(`User ${user.id} is created: \n`, user);
       }
    }

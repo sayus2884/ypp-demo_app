@@ -68,8 +68,8 @@ const calculateBaseCost = ( recipeName, commodities, onHand, labor ) => {
    recipe.ingredients.map(({ name, units }) => {
 
       if (name.includes('labor')) {
-         const { cost } = _.find(labor, { name });
-         baseCost += units * cost;
+         const { wage } = _.find(labor, { name });
+         baseCost += units * wage;
 
       } else {
          const { buyPrice } = _.find(commodities, {name});
