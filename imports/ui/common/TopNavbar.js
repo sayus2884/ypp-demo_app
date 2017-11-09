@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Menu, Icon, Dropdown } from 'semantic-ui-react';
 import { createDrowdownOptions } from '/imports/helpers/array';
 import { setCurrentShoppe } from '/imports/actions';
+import ShoppeCreationModal from '/imports/ui/components/ShoppeCreationModal';
 
 const _ = lodash;
 
@@ -47,6 +48,8 @@ class TopNavbar extends Component {
                   onChange={this._handleInputChange}
                   />
 
+               {this.renderCreateShoppeModal()}
+
                <Menu.Item
                   name='signOut'
                   active={activeItem === 'signOut'}
@@ -56,6 +59,14 @@ class TopNavbar extends Component {
             </Menu>
          </div>
       );
+   }
+
+   renderCreateShoppeModal(){
+      if (this.props.shoppes.length > 3) {
+         return '';
+      }
+
+      return <ShoppeCreationModal />;
    }
 }
 
@@ -82,5 +93,5 @@ export default withRouter(connect(state => {
       };
    }
 
-   return { shoppes:[] }
+   return { shoppes:[{key:0},{key:1},{key:2},{key:3}] }
 }, mapDispatchToProp )(TopNavbar));

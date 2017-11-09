@@ -190,4 +190,62 @@ export const IRON_MONGER = [
    },
 ];
 
+export const DISTILLERY = [
+   {
+      name:'hemp',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'hemp oil',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'iron',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'sugar cane',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'wood',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'swill',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+
+   {
+      name:'grog',
+      onHand: 0,
+      buyPrice: 0,
+      sellPrice: 0,
+      cost: 0
+   },
+]
+
 export const SHOPPE_COMMODITIES = { IRON_MONGER, LABOR };

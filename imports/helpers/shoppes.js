@@ -1,3 +1,4 @@
 export const SHOPPES = [
-   'iron monger'
+   'iron monger',
+   'shipyard'
 ]

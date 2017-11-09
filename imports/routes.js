@@ -28,7 +28,7 @@ import Labor from '/imports/ui/pages/Labor';
 export const renderRoutes = () => (
    <Provider store={store}>
       <Router history={browserHistory}>
-         <div>
+         <div style={{ height: '100%' }}>
             <LoadData />
             <Route exact path="/" component={Home}/>
             <AppLayout exact path="/dock" name="dock" component={DockSales}/>

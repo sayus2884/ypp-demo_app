@@ -1,7 +1,6 @@
 /* CSS declarations go here */
 
-body > div,
-body > div > div{
+body > div {
    height: 100%
 }
 
