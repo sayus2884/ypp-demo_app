@@ -55,6 +55,7 @@ class ShoppeCreationForm extends Component {
 
    render(){
       const { ocean, island, type, name, willUseShoppeType } = this.state;
+
       const oceanOptions = createDrowdownOptions(OCEANS, { key: 'name', value: 'name'}, {
          textOption: (text) => _.startCase(text)
       });

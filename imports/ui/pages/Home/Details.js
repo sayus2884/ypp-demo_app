@@ -107,7 +107,7 @@ class Details extends Component {
                <List.Content>Obsidian</List.Content>
             </List.Item>
             <List.Item>
-               <List.Icon name='checkmark' color="grey"/>
+               <List.Icon name='checkmark' color="green"/>
                <List.Content>Emerald</List.Content>
             </List.Item>
             <List.Item>

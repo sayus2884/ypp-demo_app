@@ -47,7 +47,7 @@ const createTaxChart = (ocean, commodities) => {
 
    if (taxCharts.length === 0) {
       const taxChart = _.assign({}, {ocean, commodities});
-      Taxes.insert(taxChart, () => console.log('Test tax chart created.'));
+      Taxes.insert(taxChart, () => console.log(`${ocean} tax chart created.`));
    }
 }
 
@@ -73,7 +73,7 @@ Meteor.startup(() => {
       password: 'ghughu'
    };
 
-   const commodityTaxes = [
+   const obsidianCommodityTaxes = [
       { name: 'iron', tax: 1.6 },
       { name: 'wood', tax: 2.1 },
       { name: 'small cannon ball', tax: 2.5 },
@@ -81,9 +81,22 @@ Meteor.startup(() => {
       { name: 'large cannon ball', tax: 7.5 },
       { name: 'basic labor', tax: 3 },
       { name: 'skilled labor', tax: 4 },
-   ]
+      { name: 'expert labor', tax: 5 },
+   ];
+
+   const emeraldCommodityTaxes = [
+      { name: 'iron', tax: 1.0 },
+      { name: 'wood', tax: 2.0 },
+      { name: 'small cannon ball', tax: 2.0 },
+      { name: 'medium cannon ball', tax: 3.8 },
+      { name: 'large cannon ball', tax: 5.6 },
+      { name: 'basic labor', tax: 3 },
+      { name: 'skilled labor', tax: 4 },
+      { name: 'expert labor', tax: 5 },
+   ];
 
    createUser(adminUser);
    createUser(testUser);
-   createTaxChart('obsidian', commodityTaxes);
+   createTaxChart('obsidian', obsidianCommodityTaxes);
+   createTaxChart('emerald', emeraldCommodityTaxes);
 });
