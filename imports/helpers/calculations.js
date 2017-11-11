@@ -4,6 +4,11 @@ import { RECIPES } from '/imports/helpers/recipes';
 const _ = lodash;
 
 // Calculate revenue if sold on docks
+export const calculateDockRevenue = ({ priceAdjustment, baseCost }) => {
+   return priceAdjustment + baseCost;
+}
+
+// Calculate revenue if sold on docks
 export const calculateRevenue = ({ onHand, buyPrice, sellPrice }) => {
    let profit = 0;
 
@@ -11,7 +16,7 @@ export const calculateRevenue = ({ onHand, buyPrice, sellPrice }) => {
 }
 
 // Calculate profit if sold on docks and produced in house
-export const calculateProfit = (recipeName, { onHand, useCost, buyPrice, sellPrice }, labor, commodities) => {
+export const calculateDockProfit = (recipeName, { onHand, useCost, buyPrice, sellPrice }, labor, commodities) => {
 
    if (hasRecipe(recipeName)) {
       return (sellPrice * onHand) - (buyPrice * onHand);
@@ -56,7 +61,7 @@ const calculateRecipeTax = (recipeName) => {
    return cost;
 }
 
-const calculateBaseCost = ( recipeName, commodities, onHand, labor ) => {
+export const calculateBaseCost = ( recipeName, commodities, onHand, labor ) => {
    if (!_.has(RECIPES, recipeName)) {
       return 0;
    }

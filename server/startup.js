@@ -3,7 +3,7 @@ import { Random } from 'meteor/random';
 import { Archipelagoes } from '/imports/api/archipelagoes';
 import { Shoppes } from '/imports/api/shoppes';
 import { Taxes } from '/imports/api/taxes';
-import { IRON_MONGER } from '/imports/helpers/shoppeCommodities';
+import { IRON_MONGER, PRODUCTS } from '/imports/helpers';
 
 const _ = lodash;
 
@@ -14,6 +14,7 @@ const createShoppe = (owner, name) => {
 
       const shoppe = _.assign({}, {
          commodities: IRON_MONGER,
+         products: PRODUCTS.IRON_MONGER,
          owner, name, createdAt: _.now(),
          ocean: 'obsidian', island: 'port venture', type: 'iron monger',
          labor: [

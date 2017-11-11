@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Grid, Container, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
+import Loading from '/imports/ui/common/Loading';
+import ProductsTable from './ProductsTable';
 
 const _ = lodash
 
@@ -11,21 +14,27 @@ class ShoppeSales extends Component {
    }
 
    render(){
-      return (
-         <Grid
-            stackable
-            textAlign='center'
-            style={{ height: '100%' }}
-            verticalAlign='middle'>
-            <Grid.Row columns={2}>
+      const isLoading = this.props.loading;
 
-               <Grid.Column>
-                  <Header>Coming Soon!</Header>
-               </Grid.Column>
-            </Grid.Row>
-         </Grid>
+      if (isLoading) {
+         return <Loading />;
+      }
+
+      return (
+         <div className="contentWrapper">
+            <Header as="h1">
+               Shoppe Sales
+            </Header>
+            <ProductsTable/>
+         </div>
       );
    }
 }
 
-export default ShoppeSales;
+export default connect( state => {
+   const { loading } = state;
+
+   return {
+      loading
+   };
+})(ShoppeSales);
